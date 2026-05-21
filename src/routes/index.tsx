@@ -1,3 +1,4 @@
+// src/routes/index.tsx
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
@@ -12,15 +13,15 @@ import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 
-const TITLE = "Ar Truck Freios — Especialistas em Freios Pneumáticos | Joinville/SC";
-const DESC = "Oficina especializada em freios pneumáticos, ABS, EBS, compressores e suspensão pneumática para caminhões e ônibus. BR-101, Joinville/SC. Desde 1998.";
+const TITLE = "Ar Truck Freios — Especialistas em Freios Pneumáticos na BR-101";
+const DESC = "Autoridade em manutenção pesada, freios pneumáticos, ABS, EBS e compressores. Localização estratégica na BR-101 KM 34, Sentido Sul - Joinville/SC.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: TITLE },
       { name: "description", content: DESC },
-      { name: "keywords", content: "oficina freio pneumático Joinville, manutenção freios caminhão SC, oficina pesada BR-101, manutenção ABS caminhão, freio pneumático ônibus, reparo válvulas Wabco, manutenção Knorr-Bremse, suspensão pneumática" },
+      { name: "keywords", content: "oficina freio pneumático Joinville, manutenção freios caminhão SC, oficina pesada BR-101 Sentido Sul, manutenção ABS caminhão, freio pneumático ônibus, reparo válvulas Wabco, manutenção Knorr-Bremse, suspensão pneumática" },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
@@ -29,9 +30,6 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "/" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" },
     ],
     scripts: [
       {
@@ -42,18 +40,37 @@ export const Route = createFileRoute("/")({
           name: "Ar Truck Freios Peças e Serviços Ltda",
           description: DESC,
           image: "/og.jpg",
-          telephone: "+55-47-3222-2222",
+          telephone: "+55-47-3028-6999",
+          email: "financeiro@artruckfreios.com.br",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "BR-101 KM 34, Sentido Sul",
+            streetAddress: "Rodovia BR-101, KM 34, Sentido Sul",
             addressLocality: "Joinville",
             addressRegion: "SC",
+            postalCode: "89219-503",
             addressCountry: "BR",
           },
-          areaServed: "Santa Catarina",
-          priceRange: "$$",
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: "-26.2625",
+            longitude: "-48.8569"
+          },
+          taxID: "02.704.801/0001-63",
+          areaServed: "Região Sul e Ecossistema Rodoviário BR-101",
+          priceRange: "$$$",
           openingHours: "Mo-Fr 08:00-18:00 Sa 08:00-12:00",
-          sameAs: [],
+          sameAs: [
+            "https://www.instagram.com/artruckfreios",
+            "https://www.facebook.com/artruckfreios",
+            "https://www.tiktok.com/@artruckfreios"
+          ],
+          department: [
+            {
+              "@type": "AutoPartsStore",
+              name: "Ar Truck Parts e Service Ltda",
+              taxID: "64.378.200/0001-65"
+            }
+          ]
         }),
       },
     ],
@@ -63,7 +80,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground antialiased">
+    <div className="min-h-screen bg-background text-foreground antialiased selection:bg-brand selection:text-white">
       <Header />
       <main>
         <Hero />

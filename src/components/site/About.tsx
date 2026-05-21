@@ -1,10 +1,11 @@
+// src/components/site/About.tsx
 import workshopImg from "@/assets/about-workshop.jpg";
 
 const timeline = [
-  { year: "1998", title: "Nasce a Beto Freios", desc: "Início como oficina especializada em sistemas de freio para veículos pesados." },
-  { year: "2008", title: "Expansão Técnica", desc: "Investimento em equipamentos pneumáticos e capacitação contínua da equipe." },
-  { year: "2017", title: "Nasce a Ar Truck Freios", desc: "Reposicionamento de marca, nova estrutura e foco em diagnóstico eletrônico." },
-  { year: "2024", title: "Referência no Sul", desc: "Atendimento estratégico na BR-101 com suporte a frotas de todo o estado." },
+  { year: "1998", title: "A fundação Beto Freios", desc: "Início ininterrupto das atividades de manutenção em freios para extrapesados." },
+  { year: "2017", title: "Modernização Técnica", desc: "Transição nominal e expansão para o suporte integral de revisões de cubos e mecatrônica." },
+  { year: "2023", title: "Nova Liderança", desc: "Integração de Guilherme Trentini e João Guilherme Pereira ao quadro societário." },
+  { year: "2026", title: "Domínio Logístico", desc: "Criação da Ar Truck Parts e Service, garantindo estoque tático de peças genuínas." },
 ];
 
 export function About() {
@@ -31,18 +32,18 @@ export function About() {
 
         <div>
           <div className="text-[10px] uppercase tracking-[0.3em] text-brand font-semibold">
-            Sobre a Ar Truck Freios
+            Governança e Autoridade
           </div>
           <h2 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-balance">
-            Tradição em mecânica pesada,{" "}
-            <span className="brand-gradient-text">obsessão por precisão</span>
+            Tradição em mecânica,{" "}
+            <span className="brand-gradient-text">obsessão por precisão acadêmica</span>
           </h2>
           <p className="mt-5 text-muted-foreground leading-relaxed">
-            De Beto Freios, em 1998, à atual Ar Truck Freios — quase três
-            décadas dedicadas à segurança de quem move o Brasil. Nossa
-            liderança técnica é qualificada pelo SENAI e cada veículo que
-            entra na nossa oficina passa por protocolos rigorosos de
-            diagnóstico, reparo e validação.
+            Nossa trajetória não é amparada apenas no empirismo. Sob a liderança técnica e administrativa de 
+            <strong className="text-foreground font-medium"> Guilherme Trentini</strong>, formado em mecânica automotiva pelo SENAI, e 
+            <strong className="text-foreground font-medium"> João Guilherme Pereira</strong>, aplicamos o rigor científico e a engenharia 
+            diretamente no chão de fábrica. Ao eliminar intermediários através da nossa subsidiária de peças autorizadas, 
+            garantimos reparos velozes e definitivos para frotas que rodam a BR-101.
           </p>
 
           <ol className="mt-10 space-y-5 relative before:content-[''] before:absolute before:left-[15px] before:top-2 before:bottom-2 before:w-px before:bg-border">
@@ -51,7 +52,7 @@ export function About() {
                 <span className="absolute left-0 top-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-brand-foreground ring-4 ring-background">
                   {t.year.slice(2)}
                 </span>
-                <div className="font-display font-semibold">
+                <div className="font-display font-semibold text-foreground">
                   {t.year} — {t.title}
                 </div>
                 <p className="text-sm text-muted-foreground mt-1">{t.desc}</p>

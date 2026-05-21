@@ -24,6 +24,28 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lógica de deslize programático (impede o teleporte bruto no mobile e desktop)
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const elem = document.getElementById(targetId);
+    
+    if (elem) {
+      // 80px é o tamanho aproximado do header, para que o scroll não tampe o título da secção
+      const headerOffset = 80; 
+      const elementPosition = elem.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+    
+    // Fecha o menu após comandar o scroll
+    setMobileMenuOpen(false);
+  };
+
   const navLinks = [
     { name: "Início", href: "#inicio" },
     { name: "Serviços", href: "#servicos" },
@@ -39,7 +61,11 @@ export function Header() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-5 lg:px-8 flex items-center justify-between">
-        <a href="#inicio" className="flex items-center gap-3 group">
+        <a 
+          href="#inicio" 
+          onClick={(e) => handleNavClick(e, '#inicio')} 
+          className="flex items-center gap-3 group"
+        >
           <img src={logo} alt="Ar Truck Freios Logo" width={48} height={48} className="h-10 w-auto sm:h-12" />
           <div className="hidden sm:block">
             <div className="font-display text-lg font-bold leading-none tracking-wide text-foreground group-hover:text-brand transition">
@@ -55,7 +81,11 @@ export function Header() {
           <ul className="flex items-center gap-6 text-sm font-medium text-muted-foreground">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a href={link.href} className="hover:text-brand transition-colors">
+                <a 
+                  href={link.href} 
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="hover:text-brand transition-colors cursor-pointer"
+                >
                   {link.name}
                 </a>
               </li>
@@ -95,8 +125,8 @@ export function Header() {
               <li key={link.name}>
                 <a
                   href={link.href}
-                  className="block text-base font-medium text-foreground hover:text-brand"
-                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-base font-medium text-foreground hover:text-brand cursor-pointer"
+                  onClick={(e) => handleNavClick(e, link.href)}
                 >
                   {link.name}
                 </a>

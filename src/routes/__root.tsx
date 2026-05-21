@@ -8,7 +8,6 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 
-// Importações cruciais
 import appCss from "../styles.css?url";
 import logoSvg from "@/assets/logo.svg";
 
@@ -75,13 +74,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#1a1a1a" },
+      { name: "color-scheme", content: "dark only" }, /* <--- BLOQUEIO DA INVERSÃO AUTOMÁTICA SAMSUNG/ANDROID */
       { name: "author", content: "Ar Truck Freios" },
     ],
     links: [
       {
         rel: "icon",
         type: "image/svg+xml",
-        href: logoSvg, // <--- Aqui está o seu Favicon em SVG
+        href: logoSvg,
       },
       {
         rel: "stylesheet",

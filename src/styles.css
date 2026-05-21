@@ -1,42 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
-
 @import "tailwindcss";
 
 @theme {
-  /* Cores Globais do Projeto */
-  --color-background: hsl(0, 0%, 10%);
-  --color-foreground: hsl(213, 31%, 91%);
+  /* Cores Globais do Projeto com Fallback Absoluto (Hexadecimal) para evitar distorções no Android/Samsung */
+  --color-background: #1a1a1a;
+  --color-foreground: #e8ecf4;
   
-  --color-card: hsl(0, 0%, 12%);
-  --color-card-foreground: hsl(213, 31%, 91%);
+  --color-card: #1e1e1e;
+  --color-card-foreground: #e8ecf4;
   
-  --color-popover: hsl(0, 0%, 10%);
-  --color-popover-foreground: hsl(213, 31%, 91%);
+  --color-popover: #1a1a1a;
+  --color-popover-foreground: #e8ecf4;
   
-  --color-primary: hsl(356, 98%, 50%);
-  --color-primary-foreground: hsl(210, 40%, 98%);
+  /* Vermelho Marca Exato e Inalterável */
+  --color-primary: #fd0517;
+  --color-primary-foreground: #ffffff;
   
-  --color-brand: hsl(356, 98%, 50%);
-  --color-brand-foreground: hsl(0, 0%, 100%);
+  --color-brand: #fd0517;
+  --color-brand-foreground: #ffffff;
   
-  --color-secondary: hsl(0, 0%, 15%);
-  --color-secondary-foreground: hsl(210, 40%, 98%);
+  --color-secondary: #262626;
+  --color-secondary-foreground: #f8fafc;
   
-  --color-muted: hsl(0, 0%, 15%);
-  --color-muted-foreground: hsl(215, 20.2%, 65.1%);
+  --color-muted: #262626;
+  --color-muted-foreground: #94a3b8;
   
-  --color-accent: hsl(356, 98%, 50%);
-  --color-accent-foreground: hsl(210, 40%, 98%);
+  --color-accent: #fd0517;
+  --color-accent-foreground: #ffffff;
   
-  --color-destructive: hsl(0, 62.8%, 30.6%);
-  --color-destructive-foreground: hsl(210, 40%, 98%);
+  --color-destructive: #b91c1c;
+  --color-destructive-foreground: #ffffff;
   
-  --color-border: hsl(0, 0%, 20%);
-  --color-input: hsl(0, 0%, 20%);
-  --color-ring: hsl(356, 98%, 50%);
+  --color-border: #333333;
+  --color-input: #333333;
+  --color-ring: #fd0517;
   
-  --color-surface: hsl(0, 0%, 13%);
+  --color-surface: #212121;
 
   /* Fontes e Animações */
   --font-oleo: "Oleo Script", cursive;
@@ -47,6 +47,9 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   *, ::before, ::after {
     border-color: var(--color-border);
   }

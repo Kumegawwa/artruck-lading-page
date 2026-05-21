@@ -1,109 +1,121 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  /* Cores Globais do Projeto */
+  --color-background: hsl(0, 0%, 10%);
+  --color-foreground: hsl(213, 31%, 91%);
+  
+  --color-card: hsl(0, 0%, 12%);
+  --color-card-foreground: hsl(213, 31%, 91%);
+  
+  --color-popover: hsl(0, 0%, 10%);
+  --color-popover-foreground: hsl(213, 31%, 91%);
+  
+  --color-primary: hsl(356, 98%, 50%);
+  --color-primary-foreground: hsl(210, 40%, 98%);
+  
+  --color-brand: hsl(356, 98%, 50%);
+  --color-brand-foreground: hsl(0, 0%, 100%);
+  
+  --color-secondary: hsl(0, 0%, 15%);
+  --color-secondary-foreground: hsl(210, 40%, 98%);
+  
+  --color-muted: hsl(0, 0%, 15%);
+  --color-muted-foreground: hsl(215, 20.2%, 65.1%);
+  
+  --color-accent: hsl(356, 98%, 50%);
+  --color-accent-foreground: hsl(210, 40%, 98%);
+  
+  --color-destructive: hsl(0, 62.8%, 30.6%);
+  --color-destructive-foreground: hsl(210, 40%, 98%);
+  
+  --color-border: hsl(0, 0%, 20%);
+  --color-input: hsl(0, 0%, 20%);
+  --color-ring: hsl(356, 98%, 50%);
+  
+  --color-surface: hsl(0, 0%, 13%);
 
-@layer base {
-  :root {
-    /* Fundo principal exigido #1a1a1a (HSL: 0 0% 10%) */
-    --background: 0 0% 10%;
-    --foreground: 213 31% 91%;
+  /* Fontes e Animações */
+  --font-oleo: "Oleo Script", cursive;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Inter", sans-serif;
 
-    --card: 0 0% 12%;
-    --card-foreground: 213 31% 91%;
-
-    --popover: 0 0% 10%;
-    --popover-foreground: 213 31% 91%;
-
-    /* Vermelho exigido #fd0517 (HSL: 356 98% 50%) */
-    --primary: 356 98% 50%;
-    --primary-foreground: 210 40% 98%;
-    --brand: 356 98% 50%;
-    --brand-foreground: 0 0% 100%;
-
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 356 98% 50%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 356 98% 50%;
-
-    --radius: 0.5rem;
-    --surface: 0 0% 13%;
-
-    /* Fonte da sua Assinatura */
-    --font-oleo: "Oleo Script", cursive;
-  }
+  --animate-marquee: marquee 30s linear infinite;
 }
 
 @layer base {
-  * {
-    @apply border-border;
+  *, ::before, ::after {
+    border-color: var(--color-border);
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-.font-oleo {
-  font-family: var(--font-oleo);
-}
-
-.glass {
-  @apply bg-background/30 backdrop-blur-md border border-white/10;
-}
-
-.pulse-ring {
-  box-shadow: 0 0 0 0 rgba(253, 5, 23, 0.7);
-  animation: pulse-ring 2s infinite cubic-bezier(0.66, 0, 0, 1);
-}
-
-@keyframes pulse-ring {
-  to {
-    box-shadow: 0 0 0 10px rgba(253, 5, 23, 0);
-  }
-}
-
-.brand-gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#fd0517] to-red-600;
-}
-
-.shadow-glow {
-  box-shadow: 0 0 20px rgba(253, 5, 23, 0.2);
-}
-
-.hover-lift {
-  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-glow;
-}
-
-.diagonal-stripes {
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.03) 0px,
-    rgba(255, 255, 255, 0.03) 1px,
-    transparent 1px,
-    transparent 10px
-  );
-}
-
-.grain {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-}
-
 @layer utilities {
+  .font-oleo {
+    font-family: var(--font-oleo);
+  }
+  
   .text-balance {
     text-wrap: balance;
   }
+
+  .glass {
+    background-color: color-mix(in srgb, var(--color-background) 30%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .pulse-ring {
+    box-shadow: 0 0 0 0 rgba(253, 5, 23, 0.7);
+    animation: pulse-ring 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+
+  .brand-gradient-text {
+    background-image: linear-gradient(to right, #fd0517, #dc2626);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(253, 5, 23, 0.2);
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 20px rgba(253, 5, 23, 0.2);
+  }
+
+  .diagonal-stripes {
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 10px
+    );
+  }
+
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes pulse-ring {
+  to { box-shadow: 0 0 0 10px rgba(253, 5, 23, 0); }
 }

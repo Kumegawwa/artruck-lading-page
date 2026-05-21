@@ -1,0 +1,151 @@
+import { useState } from "react";
+import { MessageCircle, Phone, Mail, MapPin, Navigation, Send } from "lucide-react";
+import { WHATSAPP_URL } from "./Header";
+
+export function Contact() {
+  const [sent, setSent] = useState(false);
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const msg = `Olá! Sou ${fd.get("nome")} da ${fd.get("empresa") || "—"}.
+Telefone: ${fd.get("telefone")}
+Veículo: ${fd.get("veiculo")}
+Mensagem: ${fd.get("mensagem")}`;
+    window.open(`${WHATSAPP_URL}&text=${encodeURIComponent(msg)}`, "_blank");
+    setSent(true);
+  };
+
+  return (
+    <section id="contato" className="relative py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8 grid lg:grid-cols-5 gap-10">
+        <div className="lg:col-span-2 space-y-8">
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-brand font-semibold">
+              Contato & Conversão
+            </div>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-balance">
+              Solicite seu{" "}
+              <span className="brand-gradient-text">orçamento técnico</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Resposta rápida pela nossa equipe técnica — diagnóstico,
+              orçamento e agendamento em uma só conversa.
+            </p>
+          </div>
+
+          <ul className="space-y-4">
+            <li className="flex items-start gap-4">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-brand/10 text-brand ring-1 ring-brand/20">
+                <MapPin className="h-5 w-5" />
+              </span>
+              <div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground">Endereço</div>
+                <div className="font-semibold">BR-101 KM 34 — Sentido Sul</div>
+                <div className="text-sm text-muted-foreground">Joinville / SC</div>
+              </div>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-brand/10 text-brand ring-1 ring-brand/20">
+                <Phone className="h-5 w-5" />
+              </span>
+              <div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground">Telefone</div>
+                <a href="tel:+554732222222" className="font-semibold hover:text-brand">(47) 3222-2222</a>
+              </div>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-brand/10 text-brand ring-1 ring-brand/20">
+                <Mail className="h-5 w-5" />
+              </span>
+              <div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground">E-mail</div>
+                <a href="mailto:contato@artruckfreios.com.br" className="font-semibold hover:text-brand">contato@artruckfreios.com.br</a>
+              </div>
+            </li>
+          </ul>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href={WHATSAPP_URL}
+              target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-brand px-5 py-3 text-sm font-semibold text-brand-foreground shadow-glow hover:brightness-110 transition"
+            >
+              <MessageCircle className="h-4 w-4" /> WhatsApp
+            </a>
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=BR-101+KM+34+Joinville+SC"
+              target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-semibold hover:border-brand transition"
+            >
+              <Navigation className="h-4 w-4" /> Google Maps / Waze
+            </a>
+          </div>
+
+          <div className="overflow-hidden rounded-xl border border-border aspect-[16/10]">
+            <iframe
+              title="Localização Ar Truck Freios"
+              src="https://www.google.com/maps?q=BR-101+Joinville+SC&output=embed"
+              className="h-full w-full grayscale contrast-125"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </div>
+
+        <form
+          onSubmit={onSubmit}
+          className="lg:col-span-3 relative rounded-2xl border border-border bg-surface/60 p-6 sm:p-10 grain"
+        >
+          <div className="grid sm:grid-cols-2 gap-4">
+            <Field name="nome" label="Nome" required />
+            <Field name="empresa" label="Empresa" />
+            <Field name="telefone" label="Telefone / WhatsApp" required type="tel" />
+            <Field name="veiculo" label="Veículo (marca/modelo)" />
+            <div className="sm:col-span-2">
+              <label className="text-xs uppercase tracking-wider text-muted-foreground">
+                Mensagem
+              </label>
+              <textarea
+                name="mensagem"
+                required
+                rows={5}
+                placeholder="Descreva o serviço necessário ou o problema do veículo..."
+                className="mt-2 w-full rounded-md bg-background border border-border px-4 py-3 text-sm focus:outline-none focus:border-brand transition"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="mt-6 inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-md bg-brand px-6 py-4 text-sm font-semibold text-brand-foreground shadow-glow hover:brightness-110 transition"
+          >
+            <Send className="h-4 w-4" />
+            {sent ? "Enviado — redirecionando..." : "Enviar e abrir WhatsApp"}
+          </button>
+          <p className="mt-4 text-xs text-muted-foreground">
+            Ao enviar, você concorda com nossa política de privacidade (LGPD).
+          </p>
+        </form>
+      </div>
+    </section>
+  );
+}
+
+function Field({
+  name, label, required, type = "text",
+}: { name: string; label: string; required?: boolean; type?: string }) {
+  return (
+    <div>
+      <label className="text-xs uppercase tracking-wider text-muted-foreground">
+        {label}{required && <span className="text-brand"> *</span>}
+      </label>
+      <input
+        name={name}
+        required={required}
+        type={type}
+        className="mt-2 w-full rounded-md bg-background border border-border px-4 py-3 text-sm focus:outline-none focus:border-brand transition"
+      />
+    </div>
+  );
+}
